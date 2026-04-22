@@ -6,52 +6,51 @@
 <title>Velan kehitysyhtälö — kaava 1 esimerkkiluvuilla</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: system-ui, sans-serif; background: #fff; color: #1a1a1a; padding: 2rem; max-width: 760px; margin: 0 auto; }
-  .card { background: #fff; border: 0.5px solid rgba(0,0,0,0.15); border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 12px; }
-  .card-title { font-size: 13px; font-weight: 500; color: #666; margin-bottom: 12px; }
-  .ctrl-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 1.5rem; }
-  .ctrl-group label { font-size: 13px; color: #666; display: block; margin-bottom: 6px; }
-  .ctrl-row { display: flex; align-items: center; gap: 10px; }
-  .ctrl-row input[type=range] { flex: 1; accent-color: #333; }
-  .ctrl-val { font-size: 13px; font-weight: 500; min-width: 48px; text-align: right; color: #1a1a1a; }
-  .formula-line { font-family: monospace; font-size: 15px; line-height: 2; color: #1a1a1a; }
+  body { font-family: system-ui, sans-serif; background: #fff; color: #1a1a1a; padding: 1rem; }
+  .card { background: #fff; border: 0.5px solid rgba(0,0,0,0.15); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 10px; }
+  .card-title { font-size: 13px; font-weight: 500; color: #666; margin-bottom: 10px; }
+  .ctrl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.25rem; }
+  .ctrl-group label { font-size: 13px; color: #666; display: block; margin-bottom: 5px; }
+  .ctrl-row { display: flex; align-items: center; gap: 8px; }
+  .ctrl-row input[type=range] { flex: 1; accent-color: #333; min-width: 0; }
+  .ctrl-val { font-size: 13px; font-weight: 500; min-width: 44px; text-align: right; color: #1a1a1a; }
+  .formula-line { font-family: monospace; font-size: 14px; line-height: 2; color: #1a1a1a; }
   .r { color: #A32D2D; font-weight: 500; }
   .g { color: #3B6D11; font-weight: 500; }
   .p { color: #185FA5; font-weight: 500; }
   .sfa { color: #854F0B; font-weight: 500; }
-  .result { font-size: 22px; font-weight: 500; }
+  .result { font-size: 20px; font-weight: 500; }
   .badge { display: inline-block; font-size: 12px; font-weight: 500; border-radius: 8px; padding: 4px 10px; margin-top: 8px; }
   .badge.red { background: #FCEBEB; color: #791F1F; }
   .badge.green { background: #EAF3DE; color: #27500A; }
   .badge.neutral { background: #f2f2f2; color: #666; }
   .step { display: flex; align-items: baseline; gap: 8px; font-family: monospace; font-size: 13px; color: #666; margin-bottom: 5px; }
   .step .val { color: #1a1a1a; font-weight: 500; }
-  .divider { border: none; border-top: 0.5px solid rgba(0,0,0,0.12); margin: 14px 0; }
-  .summary-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin-bottom: 0; }
-  .summary-grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; margin-top: 10px; }
-  .stat { background: #f5f5f3; border-radius: 8px; padding: 10px 12px; }
-  .stat-label { font-size: 11px; color: #666; margin-bottom: 4px; }
-  .stat-val { font-size: 17px; font-weight: 500; color: #1a1a1a; }
+  .divider { border: none; border-top: 0.5px solid rgba(0,0,0,0.12); margin: 12px 0; }
+  .summary-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; margin-bottom: 0; }
+  .summary-grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px; margin-top: 8px; }
+  .stat { background: #f5f5f3; border-radius: 8px; padding: 9px 11px; }
+  .stat-label { font-size: 11px; color: #666; margin-bottom: 3px; }
+  .stat-val { font-size: 16px; font-weight: 500; color: #1a1a1a; }
   .stat-val.red { color: #A32D2D; }
   .stat-val.green { color: #3B6D11; }
   .stat-val.amber { color: #854F0B; }
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  th { text-align: left; font-weight: 500; font-size: 12px; color: #666; padding: 6px 8px; border-bottom: 0.5px solid rgba(0,0,0,0.2); }
-  td { padding: 6px 8px; border-bottom: 0.5px solid rgba(0,0,0,0.08); color: #1a1a1a; font-family: monospace; font-size: 13px; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  th { text-align: left; font-weight: 500; font-size: 11px; color: #666; padding: 5px 6px; border-bottom: 0.5px solid rgba(0,0,0,0.2); }
+  td { padding: 5px 6px; border-bottom: 0.5px solid rgba(0,0,0,0.08); color: #1a1a1a; font-family: monospace; font-size: 12px; }
   tr:last-child td { border-bottom: none; }
   td.neg { color: #A32D2D; }
   td.pos { color: #3B6D11; }
   td.amb { color: #854F0B; }
-  td.label { font-family: system-ui, sans-serif; color: #666; font-size: 13px; }
-  td.sublabel { font-family: system-ui, sans-serif; color: #666; font-size: 13px; padding-left: 20px; }
-  .group-row td { background: #f5f5f3; font-family: system-ui, sans-serif; font-weight: 500; color: #1a1a1a; font-size: 13px; }
+  td.label { font-family: system-ui, sans-serif; color: #666; font-size: 12px; }
+  td.sublabel { font-family: system-ui, sans-serif; color: #666; font-size: 12px; padding-left: 16px; }
+  .group-row td { background: #f5f5f3; font-family: system-ui, sans-serif; font-weight: 500; color: #1a1a1a; font-size: 12px; }
   .total-row td { font-weight: 500; border-top: 0.5px solid rgba(0,0,0,0.2); }
-  .hint { font-size: 11px; color: #999; margin-top: 4px; }
-  @media (max-width: 520px) { .ctrl-grid { grid-template-columns: 1fr 1fr; } .summary-grid { grid-template-columns: 1fr 1fr; } }
+  .hint { font-size: 11px; color: #999; margin-top: 3px; }
 </style>
 </head>
 <body>
-<div style="padding: 1rem 0;">
+<div style="padding: 0.5rem 0;">
   <div class="ctrl-grid">
     <div class="ctrl-group">
       <label>Velka d<sub style="font-size:11px">t</sub> (% BKT)</label>
@@ -61,14 +60,14 @@
       </div>
     </div>
     <div class="ctrl-group">
-      <label><span style="color:#A32D2D">r</span> — korkokanta</label>
+      <label><span style="color:#A32D2D">r</span> — efektiivinen korko</label>
       <div class="ctrl-row">
         <input type="range" id="rr" min="0" max="12" step="0.1" value="4">
         <span class="ctrl-val" id="rv" style="color:#A32D2D">4.0%</span>
       </div>
     </div>
     <div class="ctrl-group">
-      <label><span style="color:#3B6D11">g</span> — BKT-kasvu</label>
+      <label><span style="color:#3B6D11">g</span> — BKT:n nimellinen kasvu</label>
       <div class="ctrl-row">
         <input type="range" id="gg" min="0" max="10" step="0.1" value="2">
         <span class="ctrl-val" id="gv" style="color:#3B6D11">2.0%</span>
@@ -94,9 +93,9 @@
   <div class="card">
     <div class="card-title">Kaava eriteltynä</div>
     <div class="formula-line">
-      d<sub style="font-size:12px">t+1</sub> = <span class="r">r</span>·d<sub style="font-size:12px">t</sub> &minus; <span class="g">g</span>·d<sub style="font-size:12px">t</sub> &minus; <span class="p">p</span> + <span class="sfa">SFA</span>
+      d<sub style="font-size:11px">t+1</sub> = <span class="r">r</span>·d<sub style="font-size:11px">t</sub> &minus; <span class="g">g</span>·d<sub style="font-size:11px">t</sub> &minus; <span class="p">p</span> + <span class="sfa">SFA</span>
     </div>
-    <div class="hint" style="margin-top:-8px; margin-bottom:4px;">p on negatiivinen kun alijäämäinen, joten −p lisää velkaa</div>
+    <div class="hint" style="margin-top:-6px; margin-bottom:4px;">p on negatiivinen kun alijäämäinen, joten −p lisää velkaa</div>
     <hr class="divider">
     <div class="card-title">Täytetään luvuilla</div>
     <div class="formula-line" id="filled">—</div>
@@ -104,13 +103,13 @@
     <div class="card-title">Lasketaan vaiheittain</div>
     <div class="step"><span style="color:#A32D2D; font-weight:500">Korkomenot</span>&nbsp;r·d = <span class="val" id="s-rd">—</span></div>
     <div class="step"><span style="color:#3B6D11; font-weight:500">Kasvuvaikutus</span>&nbsp;−g·d = <span class="val" id="s-gd">—</span></div>
-    <div class="step" style="border-top: 0.5px solid rgba(0,0,0,0.1); padding-top:6px; margin-top:2px;">Lumipallo (r−g)·d = <span class="val" id="s-snow">—</span></div>
+    <div class="step" style="border-top: 0.5px solid rgba(0,0,0,0.1); padding-top:5px; margin-top:2px;">Lumipallo (r−g)·d = <span class="val" id="s-snow">—</span></div>
     <div class="step"><span class="p">Perusjäämä</span> −p = <span class="val" id="s-p">—</span></div>
     <div class="step"><span class="sfa">SFA</span> = <span class="val" id="s-sfa">—</span></div>
-    <div class="step" style="border-top: 0.5px solid rgba(0,0,0,0.1); padding-top:6px; margin-top:2px;">Muutos Δd = <span class="val" id="s-delta">—</span></div>
+    <div class="step" style="border-top: 0.5px solid rgba(0,0,0,0.1); padding-top:5px; margin-top:2px;">Muutos Δd = <span class="val" id="s-delta">—</span></div>
     <hr class="divider">
     <div style="display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;">
-      <span style="font-size:14px; color:#666;">Velka ensi vuonna d<sub style="font-size:11px">t+1</sub>:</span>
+      <span style="font-size:13px; color:#666;">Velka ensi vuonna d<sub style="font-size:11px">t+1</sub>:</span>
       <span class="result" id="result">—</span>
     </div>
     <div id="badge"></div>
@@ -189,7 +188,7 @@ function update() {
   const totalBal = p - rd;
 
   document.getElementById('filled').innerHTML =
-    `d<sub style="font-size:12px">t+1</sub> = <span class="r">${r.toFixed(1)}%</span>·${d}% &minus; <span class="g">${g.toFixed(1)}%</span>·${d}% &minus; (<span class="p">${p.toFixed(1)}%</span>) + <span class="sfa">${(sfa>=0?'+':'')}${sfa.toFixed(1)}%</span>`;
+    `d<sub style="font-size:11px">t+1</sub> = <span class="r">${r.toFixed(1)}%</span>·${d}% &minus; <span class="g">${g.toFixed(1)}%</span>·${d}% &minus; (<span class="p">${p.toFixed(1)}%</span>) + <span class="sfa">${(sfa>=0?'+':'')}${sfa.toFixed(1)}%</span>`;
 
   document.getElementById('s-rd').textContent    = fmt(rd);
   document.getElementById('s-gd').textContent    = fmt(-gd);
@@ -223,7 +222,7 @@ function update() {
 
   document.getElementById('decomp-table').innerHTML = `
     <tr class="group-row">
-      <td colspan="4">Lumipallo-efekti&ensp;<span style="font-weight:400; font-size:12px; color:#666">(r−g)·d = ${fmt(snowball)}</span></td>
+      <td colspan="4">Lumipallo-efekti&ensp;<span style="font-weight:400; font-size:11px; color:#666">(r−g)·d = ${fmt(snowball)}</span></td>
     </tr>
     <tr>
       <td class="sublabel">Korkomenot</td>
@@ -238,7 +237,7 @@ function update() {
       <td style="text-align:right; color:#666">${share(gd, delta)}</td>
     </tr>
     <tr class="group-row">
-      <td colspan="4">Perusjäämä&ensp;<span style="font-weight:400; font-size:12px; color:#666">${p < 0 ? 'alijäämä → lisää velkaa' : 'ylijäämä → vähentää velkaa'}</span></td>
+      <td colspan="4">Perusjäämä&ensp;<span style="font-weight:400; font-size:11px; color:#666">${p < 0 ? 'alijäämä → lisää velkaa' : 'ylijäämä → vähentää velkaa'}</span></td>
     </tr>
     <tr>
       <td class="sublabel">−p</td>
@@ -247,7 +246,7 @@ function update() {
       <td style="text-align:right; color:#666">${share(pContrib, delta)}</td>
     </tr>
     <tr class="group-row">
-      <td colspan="4">Stock-flow adjustment&ensp;<span style="font-weight:400; font-size:12px; color:#666">off-budget erät</span></td>
+      <td colspan="4">Stock-flow adjustment&ensp;<span style="font-weight:400; font-size:11px; color:#666">off-budget erät</span></td>
     </tr>
     <tr>
       <td class="sublabel">SFA</td>
