@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Velan kehitysyhtälö</title>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 8px; padding: 1px; }
-  body { font-family: system-ui, sans-serif; background: #fff; color: #1a1a1a; padding: 1px; }
-  .card { background: #fff; border: 0.5px solid rgba(0,0,0,0.15); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 10px; }
+  *, *::before, *::after { box-sizing: border-box; margin: 10px; padding: 1rem; }
+  body { font-family: system-ui, sans-serif; background: #fff; color: #1a1a1a; padding: 1rem; }
+  .card { background: #fff; border: 0.5px solid rgba(0,0,0,0.15); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1px; }
   .card-title { font-size: 13px; font-weight: 500; color: #666; margin-bottom: 10px; }
   .ctrl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.25rem; }
   .ctrl-group label { font-size: 13px; color: #666; display: block; margin-bottom: 5px; }
@@ -74,7 +74,7 @@
       </div>
     </div>
     <div class="ctrl-group">
-      <label><span style="color:#185FA5">p</span> — perusjäämä (% BKT)</label>
+      <label><span style="color:#185FA5">p</span> — Perusjäämä (% BKT)</label>
       <div class="ctrl-row">
         <input type="range" id="pp" min="-10" max="5" step="0.1" value="-3">
         <span class="ctrl-val" id="pv" style="color:#185FA5">−3.0%</span>
@@ -82,7 +82,7 @@
       <div class="hint">negatiivinen = alijäämä</div>
     </div>
     <div class="ctrl-group">
-      <label><span style="color:#854F0B">SFA</span> — stock-flow adjustment (% BKT)</label>
+      <label><span style="color:#854F0B">SFA</span> — Stock-flow adjustment (% BKT)</label>
       <div class="ctrl-row">
         <input type="range" id="sfa" min="-5" max="5" step="0.1" value="0">
         <span class="ctrl-val" id="sfav" style="color:#854F0B">0.0%</span>
